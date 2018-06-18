@@ -11,7 +11,8 @@ public class User extends Base {
 	private String username;
 	@Column (name = "password", nullable = false, unique = true)
 	private String password;
-	
+	@Column (name = "telefono", nullable = false, unique = false)
+	private String telefono;
 	@Column (name = "via", nullable = false, unique = false)
 	private String via;
 	@Column (name = "cap", nullable = false, unique = true)
@@ -23,4 +24,5 @@ public class User extends Base {
     @JoinColumn (name="profile_type")
 	private UserProfile profileType;
 	
+    
 }

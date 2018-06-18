@@ -9,6 +9,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +20,7 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	 UserDetailsService userDetailsService;
@@ -35,9 +36,9 @@ public class WebSecurityConfig {
 	 @Override
 	 protected void configure(HttpSecurity http) throws Exception {
 	  http.httpBasic().and().authorizeRequests().antMatchers("/utente/login", "/utente/register", "/utente/delete", "/utente/getUserModel", "/utente/findByUsername").permitAll()//inizialmente aggiungo nel permitAll "/utente/save" per poterlo salvare
-	  .antMatchers("/ValutazioneEsameStudente/esameSuperato" , "/EsameDocente/AggiungiEsameFacolta" , "/EsameDocente/modificaDataEsame").permitAll()
-	  .antMatchers(HttpMethod.GET, "/**").permitAll()
-	  	 .antMatchers(HttpMethod.DELETE, "/**").permitAll()
+	  
+	  	.antMatchers(HttpMethod.GET, "/**").permitAll()
+	  	.antMatchers(HttpMethod.DELETE, "/**").permitAll()
 	  	 .antMatchers(HttpMethod.POST, "/**").permitAll()
 	  	 .antMatchers(HttpMethod.PUT, "/**").permitAll()
 	  	.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()

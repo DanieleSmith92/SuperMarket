@@ -1,10 +1,13 @@
 package it.dstech.SuperMarket.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,10 +30,112 @@ public class User extends Base {
 	private String prov;
     @JoinColumn (name="profile_type")
 	private UserProfile profileType;
-	
+
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+	@JsonIgnore
+	private List<CartaCredito>listaCarte;
+
+    
+
     @OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE,mappedBy="storico")
+
     @JsonIgnore
     private Storico storico;
+
+   
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public String getVia() {
+		return via;
+	}
+
+
+	public void setVia(String via) {
+		this.via = via;
+	}
+
+
+	public String getCap() {
+		return cap;
+	}
+
+
+	public void setCap(String cap) {
+		this.cap = cap;
+	}
+
+
+	public String getCitta() {
+		return citta;
+	}
+
+
+	public void setCitta(String citta) {
+		this.citta = citta;
+	}
+
+
+	public String getProv() {
+		return prov;
+	}
+
+
+	public void setProv(String prov) {
+		this.prov = prov;
+	}
+
+
+	public UserProfile getProfileType() {
+		return profileType;
+	}
+
+
+	public void setProfileType(UserProfile profileType) {
+		this.profileType = profileType;
+	}
+
+
+	public List<CartaCredito> getListaCarte() {
+		return listaCarte;
+	}
+
+
+	public void setListaCarte(List<CartaCredito> listaCarte) {
+		this.listaCarte = listaCarte;
+	}
+
+
+	public Storico getStorico() {
+		return storico;
+	}
+
+
+	public void setStorico(Storico storico) {
+		this.storico = storico;
+	}
+
+    
+
     
     
     

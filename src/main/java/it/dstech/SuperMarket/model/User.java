@@ -28,7 +28,7 @@ public class User extends Base {
 	private String citta;
 	@Column (name = "provincia", nullable = false, unique = true)
 	private String prov;
-    @JoinColumn (name="profile_type")
+    @JoinColumn (name="profile_type")>>>>>>> branch 'master' of https://github.com/DanieleSmith92/SuperMarket.git
 	private UserProfile profileType;
 
 

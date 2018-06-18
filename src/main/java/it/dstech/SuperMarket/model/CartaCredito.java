@@ -25,13 +25,51 @@ public class CartaCredito extends Base{
 	@Column(name="credito",nullable = false)
 	private double credito;
 
- @ManyToOne (fetch = FetchType.LAZY)
- @JoinColumn (name="user")
- @JsonIgnore
- 
- private User user;
- 
- 
+	@ManyToOne (fetch = FetchType.LAZY)
+	@JoinColumn (name="user")
+	@JsonIgnore
+	private User user;
 
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public LocalDate getData() {
+		return data;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+
+	public String getCvv() {
+		return cvv;
+	}
+
+	public void setCvv(String cvv) {
+		this.cvv = cvv;
+	}
+
+	public double getCredito() {
+		return credito;
+	}
+
+	public void setCredito(double credito) {
+		this.credito = credito;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
 
 }

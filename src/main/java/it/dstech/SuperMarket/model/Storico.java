@@ -24,5 +24,30 @@ public class Storico extends Base{
 	@JoinColumn (name="user")
 	@JsonIgnore
 	private User user;
+
+	public Double getTotale() {
+		return totale;
+	}
+
+	public void setTotale(Double totale) {
+		this.totale = totale;
+	}
+
+	public LocalDate getData() {
+		return data;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 
@@ -28,7 +29,7 @@ public class User extends Base {
 	private String citta;
 	@Column (name = "provincia", nullable = false, unique = true)
 	private String prov;
-    @JoinColumn (name="profile_type")
+	@Enumerated
 	private UserProfile profileType;
 
 

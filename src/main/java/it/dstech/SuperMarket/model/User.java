@@ -7,8 +7,6 @@ import javax.persistence.JoinColumn;
 @Entity (name = "user")
 public class User extends Base {
 
-	@Column (name = "id", nullable = false, unique = true)
-	private String id;
 	@Column (name = "username", nullable = false, unique = true)
 	private String username;
 	@Column (name = "password", nullable = false, unique = true)

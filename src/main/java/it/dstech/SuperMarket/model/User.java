@@ -1,15 +1,23 @@
 package it.dstech.SuperMarket.model;
 
+<<<<<<< HEAD
 import java.util.List;
 
+=======
+import javax.persistence.CascadeType;
+>>>>>>> branch 'master' of https://github.com/DanieleSmith92/SuperMarket.git
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+<<<<<<< HEAD
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.swing.text.Caret;
+=======
+import javax.persistence.OneToMany;
+>>>>>>> branch 'master' of https://github.com/DanieleSmith92/SuperMarket.git
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -32,6 +40,7 @@ public class User extends Base {
     @JoinColumn (name="profile_type")
 	private UserProfile profileType;
 	
+<<<<<<< HEAD
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
 	@JsonIgnore
 	private List<CartaCredito>listaCarte;
@@ -46,4 +55,9 @@ public class User extends Base {
     
     
     
+=======
+    @OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE,mappedBy="storico")
+    @JsonIgnore
+    public Storico storico;
+>>>>>>> branch 'master' of https://github.com/DanieleSmith92/SuperMarket.git
 }

@@ -30,5 +30,5 @@ public class User extends Base {
 	
     @OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE,mappedBy="storico")
     @JsonIgnore
-    public Storico storico;
+    private Storico storico;
 }

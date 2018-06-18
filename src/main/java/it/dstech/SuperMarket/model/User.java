@@ -1,23 +1,11 @@
 package it.dstech.SuperMarket.model;
 
-
-import java.util.List;
-
-
 import javax.persistence.CascadeType;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.swing.text.Caret;
-
-import javax.persistence.OneToMany;
-
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,19 +28,10 @@ public class User extends Base {
     @JoinColumn (name="profile_type")
 	private UserProfile profileType;
 	
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
-	@JsonIgnore
-	private List<CartaCredito>listaCarte;
-	
-	
-    
     @OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE,mappedBy="storico")
     @JsonIgnore
-
-    public Storico storico;
-
-
+    private Storico storico;
     
-
+    
+    
 }

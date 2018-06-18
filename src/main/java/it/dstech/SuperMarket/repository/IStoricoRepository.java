@@ -1,5 +1,9 @@
 package it.dstech.SuperMarket.repository;
 
-public interface IStoricoRepository {
+import org.springframework.data.repository.CrudRepository;
+
+import it.dstech.SuperMarket.model.Storico;
+
+public interface IStoricoRepository extends CrudRepository<Storico, Long>{
 
 }

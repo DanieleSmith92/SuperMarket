@@ -46,17 +46,13 @@ public class User extends Base {
 	private List<CartaCredito>listaCarte;
 	
 	
-
-			
-	
-	
-	
-	
-
-    
     
     @OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE,mappedBy="storico")
     @JsonIgnore
+
     public Storico storico;
+
+
+    
 
 }

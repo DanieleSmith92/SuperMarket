@@ -1,8 +1,13 @@
 package it.dstech.SuperMarket.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity (name = "user")
 public class User extends Base {
@@ -23,4 +28,7 @@ public class User extends Base {
     @JoinColumn (name="profile_type")
 	private UserProfile profileType;
 	
+    @OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE,mappedBy="storico")
+    @JsonIgnore
+    public Storico storico;
 }

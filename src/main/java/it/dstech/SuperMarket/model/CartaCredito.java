@@ -4,6 +4,11 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="CartaCredito")
 public class CartaCredito extends Base{
@@ -20,7 +25,13 @@ public class CartaCredito extends Base{
 	@Column(name="credito",nullable = false)
 	private double credito;
 
-
+ @ManyToOne (fetch = FetchType.LAZY)
+ @JoinColumn (name="user")
+ @JsonIgnore
+ 
+ private User user;
+ 
+ 
 
 
 }

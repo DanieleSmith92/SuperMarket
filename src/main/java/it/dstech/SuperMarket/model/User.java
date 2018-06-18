@@ -1,8 +1,17 @@
 package it.dstech.SuperMarket.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.swing.text.Caret;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity (name = "user")
 public class User extends Base {
@@ -23,4 +32,18 @@ public class User extends Base {
     @JoinColumn (name="profile_type")
 	private UserProfile profileType;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+	@JsonIgnore
+	private List<CartaCredito>listaCarte;
+	
+	
+
+			
+	
+	
+	
+	
+    
+    
+    
 }

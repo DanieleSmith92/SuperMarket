@@ -20,4 +20,5 @@ public class ProdottoService {
 	public Iterable<Prodotto> findAll() {
 		return prodottoRepository.findAll();
 	}
+	
 }

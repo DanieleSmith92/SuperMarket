@@ -17,7 +17,7 @@ public class CartaCredito extends Base{
 	private String numero;
 
 	@Column(name="data_scadenza",nullable = false)
-	private LocalDate data;
+	private LocalDate dataScadenza;
 
 	@Column(name="cvv",nullable = false)
 	private String cvv;
@@ -38,12 +38,14 @@ public class CartaCredito extends Base{
 		this.numero = numero;
 	}
 
-	public LocalDate getData() {
-		return data;
+	
+	
+	public LocalDate getDataScadenza() {
+		return dataScadenza;
 	}
 
-	public void setData(LocalDate data) {
-		this.data = data;
+	public void setDataScadenza(LocalDate dataScadenza) {
+		this.dataScadenza = dataScadenza;
 	}
 
 	public String getCvv() {

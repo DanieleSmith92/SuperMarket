@@ -34,4 +34,18 @@ public class CartaCreditoService {
 		return cartaCreditoRepository.save(carta);
 	}
 	
+	public CartaCredito update (CartaCredito carta) {
+		CartaCredito cartaDb = cartaCreditoRepository.findOne(carta.getId());
+		cartaDb.setDataScadenza(carta.getDataScadenza());
+		cartaDb.setNumero(carta.getNumero());
+		cartaDb.setCredito(carta.getCredito());
+		cartaDb.setCvv(carta.getCvv());
+		cartaDb.setUser(carta.getUser());
+		return cartaCreditoRepository.save(cartaDb);
+	}
+	
+	public void deleteOne(Long idCarta) {
+		cartaCreditoRepository.delete(idCarta);
+	}
+	
 }

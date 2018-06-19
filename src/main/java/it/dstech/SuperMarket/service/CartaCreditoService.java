@@ -3,6 +3,8 @@ package it.dstech.SuperMarket.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import it.dstech.SuperMarket.model.CartaCredito;
@@ -26,8 +28,11 @@ public class CartaCreditoService {
 		return cartaCreditoRepository.findAll();
 	}
 	
-	public CartaCredito create (Long idUser , CartaCredito carta) {
-		User user = userService.findOne(idUser);
+	public CartaCredito create (CartaCredito carta) {
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findByUsername(auth.getName());
+		
 		List<CartaCredito> listaCarte = user.getListaCarte();
 		listaCarte.add(carta);
 		user.setListaCarte(listaCarte);

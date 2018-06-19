@@ -17,7 +17,7 @@ import it.dstech.SuperMarket.service.StoricoService;
 public class StoricoCtrl {
 
 	
-<<<<<<< HEAD
+
 	@Autowired
 	private StoricoService storicoService;
 	@RequestMapping (method=RequestMethod.GET,value="/storicoPerUser")
@@ -28,6 +28,5 @@ public class StoricoCtrl {
 	
 	
 	
-=======
->>>>>>> branch 'master' of https://github.com/DanieleSmith92/SuperMarket.git
+
 }

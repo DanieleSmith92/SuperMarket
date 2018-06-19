@@ -35,14 +35,13 @@ public class User extends Base {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
 	@JsonIgnore
-	private List<CartaCredito>listaCarte;
+	private List<CartaCredito> listaCarte;
 
     
 
-    @OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE,mappedBy="storico")
-
+    @OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE,mappedBy="user")
     @JsonIgnore
-    private Storico storico;
+    private List<Storico> listaStorici;
 
    
 
@@ -126,15 +125,17 @@ public class User extends Base {
 	}
 
 
-	public Storico getStorico() {
-		return storico;
+	public List<Storico> getListaStorici() {
+		return listaStorici;
 	}
 
 
-	public void setStorico(Storico storico) {
-		this.storico = storico;
+	public void setListaStorici(List<Storico> listaStorici) {
+		this.listaStorici = listaStorici;
 	}
 
+
+	
     
 
     

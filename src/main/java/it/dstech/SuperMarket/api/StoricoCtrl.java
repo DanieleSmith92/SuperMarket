@@ -1,5 +1,7 @@
 package it.dstech.SuperMarket.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ public class StoricoCtrl {
 	@Autowired
 	private StoricoService storicoService;
 	@RequestMapping (method=RequestMethod.GET,value="/storicoPerUser")
-	public Storico storicoPerUser() {
+	public List<Storico> storicoPerUser() {
 		return storicoService.storicoPerUser();
 	}
 	

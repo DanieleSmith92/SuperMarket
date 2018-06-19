@@ -107,7 +107,9 @@ public class ProdottoService {
 			listaProdottiAcquistati.add(prodotto);
 		}
 		storico.setListaProdottiAcqustati(listaProdottiAcquistati);
-		user.setStorico(storico);
+		List<Storico> listaStorici = new ArrayList<>();
+		listaStorici.add(storico);
+		user.setListaStorici(listaStorici);
 		return userRepository.save(user);
 	}
 	

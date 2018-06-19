@@ -68,7 +68,7 @@ public class ProdottoService {
 		return listaProdottiCateg;
 	}
 
-	public  User acquistoProdotti(List<Prodotto>listaAcquisti, Storico storico,Long idUser, Long idCarta , List<String> nomeProdotto, int quantitaDaComprare){
+	public  User acquistoProdotti(List<Prodotto>listaAcquisti, Long idUser, Long idCarta , List<String> nomeProdotto, int quantitaDaComprare){
 		List<Prodotto>listaProdotti = (List<Prodotto>) prodottoRepository.findAll();
 		User user = userService.findOne(idUser);
 		CartaCredito cartaUtente = cartaCreditoService.findOne(idCarta);
@@ -92,7 +92,7 @@ public class ProdottoService {
 		
 		
 		
-		
+		Storico storico = new Storico();
 		storico.setListaProdottiAcqustati(listaAcquisti);
 		user.setStorico(storico);
 		return userRepository.save(user);

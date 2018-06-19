@@ -68,6 +68,10 @@ public class ProdottoService {
 		User user = userService.findOne(idUser);
 		storico.setListaProdottiAcqustati(listaAcquisti);
 		user.setStorico(storico);
+		
+		
+		
+		
 		return userRepository.save(user);
 	}
 

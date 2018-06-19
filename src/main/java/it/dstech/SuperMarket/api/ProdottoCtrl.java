@@ -18,4 +18,5 @@ public class ProdottoCtrl {
 	@Autowired 
 	private StoricoService storicoService;
 	
+	
 }

@@ -23,62 +23,62 @@ import org.springframework.web.filter.CorsFilter;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
-	 UserDetailsService userDetailsService;
-	 
-	  //@Bean se non funziona
-	  
-	 @Autowired
-	 public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	  auth.userDetailsService(userDetailsService);
-	  auth.authenticationProvider(authenticationProvider());
-	 }
+	UserDetailsService userDetailsService;
 
-	 @Override
-	 protected void configure(HttpSecurity http) throws Exception {
-	  http.httpBasic().and().authorizeRequests().antMatchers("/utente/login", "/utente/register", "/utente/delete", "/utente/getUserModel", "/utente/findByUsername").permitAll()//inizialmente aggiungo nel permitAll "/utente/save" per poterlo salvare
-	  
-	  	.antMatchers(HttpMethod.GET, "/**").permitAll()
-	  	.antMatchers(HttpMethod.DELETE, "/**").permitAll()
-	  	 .antMatchers(HttpMethod.POST, "/**").permitAll()
-	  	 .antMatchers(HttpMethod.PUT, "/**").permitAll()
-	  	.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-	    .anyRequest().authenticated().and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-	    .permitAll().and().csrf().disable();
-	 }
+	//@Bean se non funziona
 
-	 @Bean
-	 @Override
-	 public AuthenticationManager authenticationManagerBean() throws Exception {
-	  return super.authenticationManagerBean();
-	 }
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService);
+		auth.authenticationProvider(authenticationProvider());
+	}
 
-	 @Bean
-	 public PasswordEncoder passwordEncoder() {
-	  return new BCryptPasswordEncoder();
-	 }
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.httpBasic().and().authorizeRequests().antMatchers("/utente/login", "/utente/register", "/utente/delete", "/utente/getUserModel", "/utente/findByUsername").permitAll()//inizialmente aggiungo nel permitAll "/utente/save" per poterlo salvare
+		.antMatchers("/prodotto/acquistoProdotti").hasAnyRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/**").permitAll()
+		.antMatchers(HttpMethod.DELETE, "/**").permitAll()
+		.antMatchers(HttpMethod.POST, "/**").permitAll()
+		.antMatchers(HttpMethod.PUT, "/**").permitAll()
+		.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+		.anyRequest().authenticated().and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.permitAll().and().csrf().disable();
+	}
 
-	 @Bean
-	 public DaoAuthenticationProvider authenticationProvider() {
-	  DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-	  authenticationProvider.setUserDetailsService(userDetailsService);
-	  authenticationProvider.setPasswordEncoder(passwordEncoder());
-	  return authenticationProvider;
-	 }
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
 
-	 @Bean
-	 public CorsFilter corsFilter() {
-	  final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	  final CorsConfiguration config = new CorsConfiguration();
-	  config.setAllowCredentials(true);
-	  config.addAllowedOrigin("*");
-	  config.addAllowedHeader("*");
-	  config.addAllowedMethod("OPTIONS");
-	  config.addAllowedMethod("GET");
-	  config.addAllowedMethod("PUT");
-	  config.addAllowedMethod("POST");
-	  config.addAllowedMethod("DELETE");
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-	  source.registerCorsConfiguration("/**", config);
-	  return new CorsFilter(source);
-	 }
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+		authenticationProvider.setUserDetailsService(userDetailsService);
+		authenticationProvider.setPasswordEncoder(passwordEncoder());
+		return authenticationProvider;
+	}
+
+	@Bean
+	public CorsFilter corsFilter() {
+		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		final CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.addAllowedOrigin("*");
+		config.addAllowedHeader("*");
+		config.addAllowedMethod("OPTIONS");
+		config.addAllowedMethod("GET");
+		config.addAllowedMethod("PUT");
+		config.addAllowedMethod("POST");
+		config.addAllowedMethod("DELETE");
+
+		source.registerCorsConfiguration("/**", config);
+		return new CorsFilter(source);
+	}
 }

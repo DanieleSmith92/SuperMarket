@@ -21,7 +21,7 @@ public class Prodotto extends Base{
 	private String marca;
 	@Column(name="data_di_scadenza ", nullable = false , unique = false)
 	private LocalDate dataDiScadenza;
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING) // su postman possiamo "anno-mese-giorno"
 	private Categoria categoria;
 	@Column(name="quantita_disponibile ", nullable = false , unique = false)
 	private int quantitaDisponibile;

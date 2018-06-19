@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import it.dstech.SuperMarket.model.Categoria;
 import it.dstech.SuperMarket.model.Prodotto;
+import it.dstech.SuperMarket.model.Storico;
+import it.dstech.SuperMarket.model.User;
 import it.dstech.SuperMarket.repository.IProdottoRepository;
 
 @Service
@@ -18,6 +20,9 @@ public class ProdottoService {
 	@Autowired 
 	private StoricoService storicoService;
 
+	@Autowired 
+	private UserService userService;
+	
 	public  Iterable<Prodotto> save (Iterable<Prodotto>listaProdotti){
 		return prodottoRepository.save(listaProdotti);	
 	}
@@ -55,8 +60,15 @@ public class ProdottoService {
 		}
 		return listaProdottiCateg;
 	}
-
-	 
+	
+	/*public  List<Prodotto> acquistoProdotti(List<Prodotto>listaAcquisti, Storico storico,Long idUser){
+		List<Prodotto>listaProdotti = (List<Prodotto>) prodottoRepository.findAll();
+		User user = userService.findOne(idUser);
+		user.setStorico(storico);
+	return 
+	}
+	
+	 */
 	
 
 

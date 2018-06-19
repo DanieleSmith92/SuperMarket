@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import it.dstech.SuperMarket.model.CartaCredito;
@@ -44,6 +46,10 @@ public class ProdottoService {
 		return prodottoRepository.findAll();
 	}
 	public List<Prodotto>prodottiDisponibili(){
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByUsername(auth.getName());
+		
 		List<Prodotto>listaProdottiDisponibili = new ArrayList<>();
 		List<Prodotto>listaProdotti =(List<Prodotto>) prodottoRepository.findAll();
 		for(Prodotto prodotto: listaProdotti) {
@@ -57,6 +63,10 @@ public class ProdottoService {
 	}
 
 	public List<Prodotto>listaProdottiCategoria (Categoria categoria){
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByUsername(auth.getName());
+		
 		List<Prodotto>listaProdotti = (List<Prodotto>) prodottoRepository.findAll();
 		List<Prodotto>listaProdottiCateg =new ArrayList<>();
 		for(Prodotto prodotto:listaProdotti) {
@@ -68,16 +78,19 @@ public class ProdottoService {
 		return listaProdottiCateg;
 	}
 
-	public  User acquistoProdotti(List<Prodotto>listaAcquisti, Storico storico,Long idUser, Long idCarta , List<String> nomeProdotto, int quantitaDaComprare){
+	public  User acquistoProdotti( List<Long> listaIdAcquisti, Long idCarta){
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByUsername(auth.getName());
+		
+		Integer quantitaDaComprare = 1;
 		List<Prodotto>listaProdotti = (List<Prodotto>) prodottoRepository.findAll();
-		User user = userService.findOne(idUser);
 		CartaCredito cartaUtente = cartaCreditoService.findOne(idCarta);
 		List<Prodotto> listaOffertaRandom = listaRandom();
 		List<Prodotto> listaOfferta = offertaDataScandenza();
 		for (Prodotto prodotto : listaProdotti) {
-			if (prodotto.getNome().equals(nomeProdotto.contains(prodotto.getNome()))) {
-				if(prodotto.getQuantitaDisponibile() > quantitaDaComprare && cartaUtente.getCredito() >= prodotto.getPrezzoIvato()) {
-					listaAcquisti.add(prodotto);
+			if (prodotto.getId().equals(listaIdAcquisti.contains(prodotto.getId()))) {
+				if(prodotto.getQuantitaDisponibile() >= quantitaDaComprare && cartaUtente.getCredito() >= prodotto.getPrezzoIvato()) {
 					if(listaOffertaRandom.contains(prodotto) && listaOfferta.contains(prodotto)) {
 						Double nuovoCredito = cartaUtente.getCredito()-prodotto.getPrezzoIvato();
 						cartaUtente.setCredito(nuovoCredito);
@@ -86,13 +99,24 @@ public class ProdottoService {
 			}
 			prodotto.setQuantitaDisponibile(prodotto.getQuantitaDisponibile()-quantitaDaComprare);
 		}
-		storico.setListaProdottiAcqustati(listaAcquisti);
+		
+		Storico storico = new Storico();
+		List<Prodotto> listaProdottiAcquistati = new ArrayList<>();
+		for (Long idAcquistato  : listaIdAcquisti) {
+			Prodotto prodotto = prodottoRepository.findOne(idAcquistato);
+			listaProdottiAcquistati.add(prodotto);
+		}
+		storico.setListaProdottiAcqustati(listaProdottiAcquistati);
 		user.setStorico(storico);
 		return userRepository.save(user);
 	}
-
+	
 
 	public List<Prodotto> offertaDataScandenza() {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByUsername(auth.getName());
+		
 		List<Prodotto> listaProdotti  = (List<Prodotto>) prodottoRepository.findAll();
 		List<Prodotto> listaProdottiOfferta = new ArrayList<>();
 		for(Prodotto prodotto : listaProdotti) {
@@ -105,7 +129,12 @@ public class ProdottoService {
 		return listaProdottiOfferta;
 	}
 	
+	
 	public List<Prodotto> listaRandom (){
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByUsername(auth.getName());
+		
 		
 		Double percentualeSconto = 0.1;
 		Random randomGetLista = new Random();
@@ -124,8 +153,6 @@ public class ProdottoService {
 		
 		return listaRandom;
 	}
-
-
 
 
 }

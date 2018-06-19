@@ -40,6 +40,11 @@ public class CartaCreditoService {
 	}
 	
 	public CartaCredito update (CartaCredito carta) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findByUsername(auth.getName());
+		
+		
 		CartaCredito cartaDb = cartaCreditoRepository.findOne(carta.getId());
 		cartaDb.setDataScadenza(carta.getDataScadenza());
 		cartaDb.setNumero(carta.getNumero());

@@ -86,13 +86,6 @@ public class ProdottoService {
 			}
 			prodotto.setQuantitaDisponibile(prodotto.getQuantitaDisponibile()-quantitaDaComprare);
 		}
-		
-		
-		
-		
-		
-		
-		
 		storico.setListaProdottiAcqustati(listaAcquisti);
 		user.setStorico(storico);
 		return userRepository.save(user);

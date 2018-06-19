@@ -1,11 +1,13 @@
 package it.dstech.SuperMarket.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
@@ -24,6 +26,11 @@ public class Storico extends Base{
 	@JoinColumn (name="user")
 	@JsonIgnore
 	private User user;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "prodotti_acquistati")
+	@JsonIgnore
+	private List<Prodotto> listaProdottiAcqustati;
 
 	public Double getTotale() {
 		return totale;
@@ -47,6 +54,14 @@ public class Storico extends Base{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<Prodotto> getListaProdottiAcqustati() {
+		return listaProdottiAcqustati;
+	}
+
+	public void setListaProdottiAcqustati(List<Prodotto> listaProdottiAcqustati) {
+		this.listaProdottiAcqustati = listaProdottiAcqustati;
 	}
 	
 	

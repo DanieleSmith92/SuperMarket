@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -20,11 +21,11 @@ public class Prodotto extends Base{
 	private String marca;
 	@Column(name="data_di_scadenza ", nullable = false , unique = false)
 	private LocalDate dataDiScadenza;
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 	@Column(name="quantita_disponibile ", nullable = false , unique = false)
 	private int quantitaDisponibile;
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private Unita unita;
 	@Column(name="prezzo_unitario ", nullable = false , unique = false)
 	private Double prezzoUnitario;

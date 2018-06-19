@@ -30,6 +30,8 @@ public class CartaCredito extends Base{
 	@JsonIgnore
 	private User user;
 
+	
+	
 	public String getNumero() {
 		return numero;
 	}
@@ -70,6 +72,6 @@ public class CartaCredito extends Base{
 		this.user = user;
 	}
 
-	
+
 
 }

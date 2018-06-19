@@ -55,6 +55,14 @@ public class Storico extends Base{
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public List<Prodotto> getListaProdottiAcqustati() {
+		return listaProdottiAcqustati;
+	}
+
+	public void setListaProdottiAcqustati(List<Prodotto> listaProdottiAcqustati) {
+		this.listaProdottiAcqustati = listaProdottiAcqustati;
+	}
 	
 	
 }

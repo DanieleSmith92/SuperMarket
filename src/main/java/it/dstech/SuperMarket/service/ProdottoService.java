@@ -1,13 +1,11 @@
 package it.dstech.SuperMarket.service;
 
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Random;
 import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import it.dstech.SuperMarket.model.CartaCredito;
@@ -70,12 +68,9 @@ public class ProdottoService {
 		return listaProdottiCateg;
 	}
 
-	public  User acquistoProdotti(List<Prodotto>listaAcquisti, Long idCarta , List<String> nomeProdotto, int quantitaDaComprare){
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findByUsername(auth.getName());
-		
+	public  User acquistoProdotti(List<Prodotto>listaAcquisti, Storico storico,Long idUser, Long idCarta , List<String> nomeProdotto, int quantitaDaComprare){
 		List<Prodotto>listaProdotti = (List<Prodotto>) prodottoRepository.findAll();
+		User user = userService.findOne(idUser);
 		CartaCredito cartaUtente = cartaCreditoService.findOne(idCarta);
 		List<Prodotto> listaOffertaRandom = listaRandom();
 		List<Prodotto> listaOfferta = offertaDataScandenza();
@@ -91,13 +86,6 @@ public class ProdottoService {
 			}
 			prodotto.setQuantitaDisponibile(prodotto.getQuantitaDisponibile()-quantitaDaComprare);
 		}
-		
-		
-		
-		
-		
-		
-		Storico storico = new Storico();
 		storico.setListaProdottiAcqustati(listaAcquisti);
 		user.setStorico(storico);
 		return userRepository.save(user);

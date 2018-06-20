@@ -35,6 +35,7 @@ public class CartaCreditoService {
 		
 		List<CartaCredito> listaCarte = user.getListaCarte();
 		listaCarte.add(carta);
+		carta.setUser(user);
 		user.setListaCarte(listaCarte);
 		return cartaCreditoRepository.save(carta);
 	}

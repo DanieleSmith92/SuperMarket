@@ -32,7 +32,7 @@ public class Prodotto extends Base{
 	@Column(name="prezzo_ivato ", nullable = false , unique = false)
 	private Double prezzoIvato;
 	@Column(name=" offerta", nullable = false , unique = false)
-	private int offerta;
+	private int offerta; //passare la percentuale, esempio 10% è 0.1
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "prodotto_storico",

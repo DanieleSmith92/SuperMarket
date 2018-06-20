@@ -138,7 +138,6 @@ public class ProdottoService {
 		User user = userRepository.findByUsername(auth.getName());
 		
 		
-		Double percentualeSconto = 0.1;
 		Random randomGetLista = new Random();
 		List<Prodotto> listaProdotti  = (List<Prodotto>) prodottoRepository.findAll();
 		List<Prodotto> listaRandom = new ArrayList<>();
@@ -150,7 +149,7 @@ public class ProdottoService {
 		}
 		
 		for(Prodotto prodotto : listaRandom) {
-			prodotto.setPrezzoIvato(prodotto.getPrezzoIvato() - (prodotto.getPrezzoIvato()*percentualeSconto));
+			prodotto.setPrezzoIvato(prodotto.getPrezzoIvato() - (prodotto.getPrezzoIvato()*prodotto.getOfferta()));
 		}
 		
 		return listaRandom;

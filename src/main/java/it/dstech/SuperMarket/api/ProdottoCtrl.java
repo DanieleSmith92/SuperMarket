@@ -28,7 +28,7 @@ public class ProdottoCtrl {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/findOne")
-	public Prodotto findOne(@RequestParam ("id") Long id) {
+	public Prodotto findOne(@RequestParam ("id") Long id) throws Exception {
 		return prodottoService.findOne(id);
 	}
 	
@@ -38,7 +38,7 @@ public class ProdottoCtrl {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/acquistoProdotti")
-	public  User acquistoProdotti( @RequestBody List<Long> listaIdAcquisti, Long idCarta){
+	public  User acquistoProdotti( @RequestBody List<Long> listaIdAcquisti, Long idCarta) throws Exception{
 		return prodottoService.acquistoProdotti(listaIdAcquisti, idCarta);
 	}
 	

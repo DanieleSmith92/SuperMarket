@@ -27,11 +27,16 @@ public class Storico extends Base{
 	@JsonIgnore
 	private User user;
 	
+	/* quando metto in relazione due liste con una ManyToMany la relazione
+	 * @ManyToMany va messa solo da una parte,altrimneti crea 3 tabelle
+	 * se legassi invece una lista con un solo oggetto la posso mettere su entrambi
+	*/
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "prodotti_acquistati")
 	@JsonIgnore
 	private List<Prodotto> listaProdottiAcqustati;
-
+	
+	
 	public Double getTotale() {
 		return totale;
 	}
@@ -56,6 +61,7 @@ public class Storico extends Base{
 		this.user = user;
 	}
 
+	
 	public List<Prodotto> getListaProdottiAcqustati() {
 		return listaProdottiAcqustati;
 	}

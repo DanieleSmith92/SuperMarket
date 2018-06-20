@@ -39,7 +39,7 @@ public class UserCtrl {
 		service.deleteAll();
 	}
 	@RequestMapping (method = RequestMethod.GET, value = "/findOne")
-	public User findOne (@RequestParam ("id") Long id) {
+	public User findOne (@RequestParam ("id") Long id) throws Exception {
 		return service.findOne(id);
 	}
 	@RequestMapping (method = RequestMethod.GET, value = "/findAll")
@@ -47,7 +47,7 @@ public class UserCtrl {
 		return service.findAll();
 	}
 	@RequestMapping (method = RequestMethod.PUT, value = "/update")
-	public User update (@RequestBody User userInput) {
+	public User update (@RequestBody User userInput) throws Exception {
 		return service.update(userInput);
 	}
 	@PostMapping("/login")

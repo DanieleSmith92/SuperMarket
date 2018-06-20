@@ -33,14 +33,14 @@ public class ProdottoService {
 	private UserService userService;
 
 	public  Iterable<Prodotto> save (Iterable<Prodotto>listaProdotti){
-		return prodottoRepository.save(listaProdotti);	
+		return prodottoRepository.saveAll(listaProdotti);	
 	}
 
 
 
 
-	public Prodotto findOne(Long id) {
-		return prodottoRepository.findOne(id);
+	public Prodotto findOne(Long id) throws Exception {
+		return prodottoRepository.findById(id).orElseThrow(()-> new Exception());
 	}
 	public Iterable<Prodotto> findAll() {
 		return prodottoRepository.findAll();
@@ -78,7 +78,7 @@ public class ProdottoService {
 		return listaProdottiCateg;
 	}
 
-	public  User acquistoProdotti( List<Long> listaIdAcquisti, Long idCarta){
+	public  User acquistoProdotti( List<Long> listaIdAcquisti, Long idCarta) throws Exception{
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepository.findByUsername(auth.getName());
@@ -103,7 +103,7 @@ public class ProdottoService {
 		Storico storico = new Storico();
 		List<Prodotto> listaProdottiAcquistati = new ArrayList<>();
 		for (Long idAcquistato  : listaIdAcquisti) {
-			Prodotto prodotto = prodottoRepository.findOne(idAcquistato);
+			Prodotto prodotto = findOne(idAcquistato);
 			listaProdottiAcquistati.add(prodotto);
 		}
 		storico.setListaProdottiAcqustati(listaProdottiAcquistati);

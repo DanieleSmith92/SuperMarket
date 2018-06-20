@@ -18,7 +18,7 @@ public class CartaCreditoCtrl {
 	@Autowired
 	CartaCreditoService serviceCartaCredito;
 
-	public CartaCredito findOne(@PathVariable("id")Long id) {
+	public CartaCredito findOne(@PathVariable("id")Long id) throws Exception {
 		return serviceCartaCredito.findOne(id);
 	}
 	@RequestMapping(method=RequestMethod.GET, value="/findAll")
@@ -30,7 +30,7 @@ public class CartaCreditoCtrl {
 			return serviceCartaCredito.create(carta);
 	}
 	@RequestMapping(method=RequestMethod.POST, value="/update")
-	public CartaCredito update(@RequestParam("carta")CartaCredito carta) {
+	public CartaCredito update(@RequestParam("carta")CartaCredito carta) throws Exception {
 		return serviceCartaCredito.update(carta);
 	}
 	@RequestMapping(method=RequestMethod.DELETE, value="/deleteOne")

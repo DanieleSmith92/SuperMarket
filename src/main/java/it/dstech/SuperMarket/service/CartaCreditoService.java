@@ -20,8 +20,8 @@ public class CartaCreditoService {
 	@Autowired
 	private UserService userService;
 	
-	public CartaCredito findOne(Long id) {
-		return cartaCreditoRepository.findOne(id);
+	public CartaCredito findOne(Long id) throws Exception {
+		return cartaCreditoRepository.findById(id).orElseThrow(()-> new Exception());
 	}
 	
 	public Iterable<CartaCredito> findAll() {
@@ -39,13 +39,13 @@ public class CartaCreditoService {
 		return cartaCreditoRepository.save(carta);
 	}
 	
-	public CartaCredito update (CartaCredito carta) {
+	public CartaCredito update (CartaCredito carta) throws Exception {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findByUsername(auth.getName());
 		
 		
-		CartaCredito cartaDb = cartaCreditoRepository.findOne(carta.getId());
+		CartaCredito cartaDb = findOne(carta.getId());
 		cartaDb.setDataScadenza(carta.getDataScadenza());
 		cartaDb.setNumero(carta.getNumero());
 		cartaDb.setCredito(carta.getCredito());
@@ -55,7 +55,7 @@ public class CartaCreditoService {
 	}
 	
 	public void deleteOne(Long idCarta) {
-		cartaCreditoRepository.delete(idCarta);
+		cartaCreditoRepository.deleteById(idCarta);
 	}
 	
 	

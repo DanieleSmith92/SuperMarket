@@ -31,8 +31,7 @@ public class Storico extends Base{
 	 * @ManyToMany va messa solo da una parte,altrimneti crea 3 tabelle
 	 * se legassi invece una lista con un solo oggetto la posso mettere su entrambi
 	*/
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "prodotti_acquistati")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "listaStorici")
 	@JsonIgnore
 	private List<Prodotto> listaProdottiAcqustati;
 	

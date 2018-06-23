@@ -19,33 +19,34 @@ public class User extends Base {
 
 	@Column (name = "username", nullable = false, unique = true)
 	private String username;
+	
 	@Column (name = "password", nullable = false, unique = true)
 	private String password;
 	
 	@Column (name = "via", nullable = false, unique = false)
 	private String via;
+	
 	@Column (name = "cap", nullable = false, unique = true)
 	private String cap;
+	
 	@Column (name = "citta", nullable = false, unique = true)
 	private String citta;
+	
 	@Column (name = "provincia", nullable = false, unique = true)
 	private String prov;
+	
 	@Enumerated(EnumType.STRING)
 	private UserProfile profileType;
-
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
 	@JsonIgnore
 	private List<CartaCredito> listaCarte;
-
-    
-
+  
     @OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE,mappedBy="user")
     @JsonIgnore
     private List<Storico> listaStorici;
 
-   
-
+ 
 	public String getUsername() {
 		return username;
 	}
@@ -135,11 +136,4 @@ public class User extends Base {
 		this.listaStorici = listaStorici;
 	}
 
-
-	
-    
-
-    
-    
-    
 }

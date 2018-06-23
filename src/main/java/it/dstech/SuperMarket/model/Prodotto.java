@@ -17,20 +17,28 @@ public class Prodotto extends Base{
 
 	@Column(name="nome ", nullable = false , unique = false)
 	private String nome;
+	
 	@Column(name="marca ", nullable = false , unique = false)
 	private String marca;
+	
 	@Column(name="data_di_scadenza ", nullable = false , unique = false)
 	private LocalDate dataDiScadenza;
+	
 	@Enumerated(EnumType.STRING) // su postman possiamo "anno-mese-giorno"
 	private Categoria categoria;
+	
 	@Column(name="quantita_disponibile ", nullable = false , unique = false)
 	private int quantitaDisponibile;
+	
 	@Enumerated(EnumType.STRING)
 	private Unita unita;
+	
 	@Column(name="prezzo_unitario ", nullable = false , unique = false)
 	private Double prezzoUnitario;
+	
 	@Column(name="prezzo_ivato ", nullable = false , unique = false)
 	private Double prezzoIvato;
+	
 	@Column(name=" offerta", nullable = false , unique = false)
 	private int offerta; //passare la percentuale, esempio 10% è 0.1
 
@@ -123,7 +131,4 @@ public class Prodotto extends Base{
 		this.listaStorici = listaStorici;
 	}
 	
-	
-	
-
 }
